@@ -5,8 +5,11 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 
+
+
+//MIDDLEWARES
 app.use(cors({  //CORS is used to allow cross-origin requests
-    origin: process.env.CORS_ORIGIN,
+    origin: "*",
     credentials: true
 }));
 app.use(express.json({ //Jo body mein data aata hai usko json mein convert karne ke liye
@@ -18,6 +21,16 @@ app.use(express.urlencoded({  //To support URL encoded bodies jaise kuch mein wo
 }));
 app.use(express.static('public')); //saare static files
 app.use(cookieParser()); //To parse cookies from the request
+
+
+
+//ROUTES
+//routes import
+import userRouter from './routes/user.routes.js';
+
+
+//routes declaration
+app.use("/api/v1/users", userRouter); //https://localhost:5000/api/v1/users/register
 
 
 
